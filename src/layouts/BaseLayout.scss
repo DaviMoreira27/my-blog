@@ -1,10 +1,32 @@
 @use '../variables' as *;
 
+body {
+    display: flex;
+    min-height: 100vh;
+    background-color: $mocha-base;
+    overflow-x: hidden;
+}
+
 .content-wrapper {
-    margin-left: 30rem;
+    flex-grow: 1;
     padding: 2rem;
     min-height: 100vh;
     background-color: $mocha-base;
+    margin-left: 10rem;
+
+    @media (max-width: 1300px) {
+        margin-left: 15rem;
+    }
+
+    @media (max-width: 1024px) {
+        padding-top: 5rem;
+    }
+
+    @media (max-width: 768px) {
+        margin-left: 0rem;
+        padding: 1rem;
+        margin-top: 6rem;
+    }
 }
 
 .main-content {
@@ -38,6 +60,14 @@
         -webkit-text-fill-color: transparent;
         background-size: 200% 200%;
         animation: gradient-shift 3s ease-in-out infinite;
+
+        @media (max-width: 768px) {
+            font-size: 2rem;
+        }
+
+        @media (max-width: 480px) {
+            font-size: 1.75rem;
+        }
     }
 
     .publish-date {
@@ -53,7 +83,7 @@
     gap: 4rem;
     align-items: start;
 
-    @media (max-width: 1200px) {
+    @media (max-width: 1300px) {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
@@ -64,6 +94,10 @@
     line-height: 1.7;
     font-size: 1.125rem;
     color: $mocha-text;
+
+    @media (max-width: 768px) {
+        font-size: 1rem;
+    }
 
     h2 {
         font-size: 1.75rem;
@@ -84,6 +118,10 @@
             background: linear-gradient(180deg, $mocha-blue, $mocha-sapphire);
             border-radius: 2px;
         }
+
+        @media (max-width: 768px) {
+            font-size: 1.5rem;
+        }
     }
 
     h3 {
@@ -92,6 +130,10 @@
         margin: 2rem 0 1rem 0;
         color: $mocha-sapphire;
         scroll-margin-top: 2rem;
+
+        @media (max-width: 768px) {
+            font-size: 1.25rem;
+        }
     }
 
     h4 {
@@ -100,6 +142,10 @@
         margin: 1.5rem 0 0.75rem 0;
         color: $mocha-sky;
         scroll-margin-top: 2rem;
+
+        @media (max-width: 768px) {
+            font-size: 1.1rem;
+        }
     }
 
     p {
@@ -110,7 +156,6 @@
     ul,
     ol {
         margin-bottom: 1.5rem;
-        padding-left: 1.5rem;
 
         li {
             margin-bottom: 0.5rem;
@@ -197,7 +242,6 @@
     }
 }
 
-// Animação para o título
 @keyframes gradient-shift {
 
     0%,

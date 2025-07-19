@@ -3,8 +3,8 @@
 .post-list {
     list-style: none;
     padding: 0;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
 }
 
@@ -17,6 +17,7 @@
     gap: 0.5rem;
     transition: all 0.3s ease;
     cursor: pointer;
+    /* Remover height: 100% daqui, pois o post-card já vai gerenciar isso */
 
     &:hover {
         background-color: lighten($mocha-surface0, 5%);
@@ -29,6 +30,10 @@
     background-color: $mocha-surface1;
     padding: 1rem;
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    /* Mantém a altura igual para todos os cards no grid */
 }
 
 .post-title {
@@ -37,16 +42,46 @@
     color: $mocha-text;
     text-decoration: none;
     transition: color 0.3s ease;
+    margin-bottom: 0.5rem;
+
+    @media (max-width: 768px) {
+        font-size: 1.1rem;
+    }
 }
 
 .post-description {
     color: $mocha-subtext1;
     font-size: 1rem;
+    flex-grow: 1;
+    margin-bottom: 1rem;
+
+    /* --- Adicionado para limitar o texto --- */
+    overflow: hidden;
+    /* Esconde o texto que transborda */
+    display: -webkit-box;
+    /* Necessário para -webkit-line-clamp */
+    -webkit-box-orient: vertical;
+    /* Define a orientação da caixa */
+    -webkit-line-clamp: 3;
+    /* Limita o texto a 3 linhas (ajuste este valor) */
+    text-overflow: ellipsis;
+    /* Adiciona a elipse se o texto for cortado */
+    /* --- Fim da adição --- */
+
+    @media (max-width: 768px) {
+        font-size: 0.95rem;
+    }
 }
 
 .post-meta {
     font-size: 0.9rem;
     color: $mocha-overlay1;
+    margin-top: auto;
+    margin-bottom: 0.5rem;
+
+    @media (max-width: 768px) {
+        font-size: 0.85rem;
+    }
 }
 
 .post-tags {
@@ -66,6 +101,11 @@
 
     &:hover {
         transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+        font-size: 0.7rem;
+        padding: 0.15rem 0.5rem;
     }
 }
 
