@@ -1,6 +1,10 @@
 const postModules = import.meta.glob("../src/contents/blog/**/*.{md,mdx}", {
   eager: true,
 });
+const postFiles = import.meta.glob("../src/contents/blog/**/*.{md,mdx}", {
+  as: "raw",
+  eager: true,
+});
 
 const aboutModules = import.meta.glob(
   "../src/contents/about-me/**/*.{md,mdx}",
@@ -8,10 +12,21 @@ const aboutModules = import.meta.glob(
     eager: true,
   }
 );
+const aboutFiles = import.meta.glob("../src/contents/about-me/**/*.{md,mdx}", {
+  as: "raw",
+  eager: true,
+});
 
 const projectModules = import.meta.glob(
   "../src/contents/projects/**/*.{md,mdx}",
   {
+    eager: true,
+  }
+);
+const projectFiles = import.meta.glob(
+  "../src/contents/projects/**/*.{md,mdx}",
+  {
+    as: "raw",
     eager: true,
   }
 );
@@ -27,6 +42,7 @@ interface MDXModule {
     author?: string;
     draft?: boolean;
     showToc?: boolean;
+    period?: string;
     [key: string]: any;
   };
   default: any;
@@ -53,6 +69,7 @@ export interface Project {
   title: string;
   description: string;
   period: string;
+  readingTime?: string;
   tags?: string[];
   author?: string;
   draft?: boolean;
@@ -64,20 +81,17 @@ export interface Project {
 export function calculateReadingTime(content?: string): string {
   if (!content) return "1 minute of reading";
 
-  const wordsPerMinute = 200;
+  const wordsPerMinute = 150;
   const words = content.trim().split(/\s+/).length;
   const minutes = Math.ceil(words / wordsPerMinute);
 
-  if (minutes === 1) {
-    return "1 minute of reading";
-  }
-  return `${minutes} minutes of reading`;
+  return minutes <= 1 ? "1 minute of reading" : `${minutes} minutes of reading`;
 }
 
 export function formatDate(date: string | Date): string {
   const dateObj = typeof date === "string" ? new Date(date) : date;
 
-  return dateObj.toLocaleDateString("pt-BR", {
+  return dateObj.toLocaleDateString("en", {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -94,19 +108,14 @@ function getSlugFromPath(filePath: string): string {
 }
 
 export async function getAllPosts(): Promise<BlogPost[]> {
-  const modules = import.meta.glob("../src/contents/blog/**/*.{md,mdx}", {
-    eager: true,
-  });
   const posts: BlogPost[] = [];
 
-  for (const [path, module] of Object.entries(modules)) {
+  for (const [pathRelative, module] of Object.entries(postModules)) {
     const mdxModule = module as MDXModule;
 
-    if (!mdxModule.frontmatter || mdxModule.frontmatter.draft) {
-      continue;
-    }
+    if (!mdxModule.frontmatter || mdxModule.frontmatter.draft) continue;
 
-    const slug = getSlugFromPath(path);
+    const slug = getSlugFromPath(pathRelative);
     const publishDate =
       mdxModule.frontmatter.publishDate || mdxModule.frontmatter.date;
 
@@ -115,13 +124,15 @@ export async function getAllPosts(): Promise<BlogPost[]> {
       continue;
     }
 
+    const rawContent = postFiles[pathRelative];
+    const readingTime =
+      mdxModule.frontmatter.readingTime || calculateReadingTime(rawContent);
+
     posts.push({
       title: mdxModule.frontmatter.title,
       description: mdxModule.frontmatter.description,
       publishDate,
-      readingTime:
-        mdxModule.frontmatter.readingTime ||
-        calculateReadingTime(mdxModule.compiledContent?.()),
+      readingTime,
       tags: mdxModule.frontmatter.tags || [],
       author: mdxModule.frontmatter.author,
       draft: mdxModule.frontmatter.draft || false,
@@ -138,31 +149,30 @@ export async function getAllPosts(): Promise<BlogPost[]> {
 }
 
 export async function getAllProjects(): Promise<Project[]> {
-  const modules = import.meta.glob("../src/contents/projects/**/*.{md,mdx}", {
-    eager: true,
-  });
-  const posts: Project[] = [];
+  const projects: Project[] = [];
 
-  for (const [path, module] of Object.entries(modules)) {
+  for (const [pathRelative, module] of Object.entries(projectModules)) {
     const mdxModule = module as MDXModule;
 
-    if (!mdxModule.frontmatter || mdxModule.frontmatter.draft) {
-      continue;
-    }
+    if (!mdxModule.frontmatter || mdxModule.frontmatter.draft) continue;
 
-    const slug = getSlugFromPath(path);
-    const period =
-      mdxModule.frontmatter.period || mdxModule.frontmatter.date;
+    const slug = getSlugFromPath(pathRelative);
+    const period = mdxModule.frontmatter.period || mdxModule.frontmatter.date;
 
     if (!period) {
-      console.warn(`Post ${slug} has no period in the frontMatter`);
+      console.warn(`Project ${slug} has no period in the frontMatter`);
       continue;
     }
 
-    posts.push({
+    const rawContent = projectFiles[pathRelative];
+    const readingTime =
+      mdxModule.frontmatter.readingTime || calculateReadingTime(rawContent);
+
+    projects.push({
       title: mdxModule.frontmatter.title,
       description: mdxModule.frontmatter.description,
       period,
+      readingTime,
       tags: mdxModule.frontmatter.tags || [],
       author: mdxModule.frontmatter.author,
       draft: mdxModule.frontmatter.draft || false,
@@ -171,11 +181,13 @@ export async function getAllProjects(): Promise<Project[]> {
       content: mdxModule,
     });
   }
-  return posts;
+
+  return projects;
 }
 
 export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
   const combinedModules = { ...postModules, ...aboutModules };
+  const combinedFiles = { ...postFiles, ...aboutFiles };
 
   const entry = Object.entries(combinedModules).find(
     ([path]) => path.includes(`${slug}.md`) || path.includes(`${slug}.mdx`)
@@ -183,7 +195,7 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
 
   if (!entry) return null;
 
-  const [, mdxModule] = entry;
+  const [pathRelative, mdxModule] = entry;
   const typedModule = mdxModule as MDXModule;
 
   const publishDate =
@@ -194,13 +206,15 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
     return null;
   }
 
+  const rawContent = combinedFiles[pathRelative];
+  const readingTime =
+    typedModule.frontmatter.readingTime || calculateReadingTime(rawContent);
+
   return {
     title: typedModule.frontmatter.title,
     description: typedModule.frontmatter.description,
     publishDate,
-    readingTime:
-      typedModule.frontmatter.readingTime ||
-      calculateReadingTime(typedModule.compiledContent?.()),
+    readingTime,
     tags: typedModule.frontmatter.tags || [],
     author: typedModule.frontmatter.author,
     draft: typedModule.frontmatter.draft || false,
@@ -212,6 +226,7 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
 
 export async function getProjectBySlug(slug: string): Promise<Project | null> {
   const combinedModules = { ...projectModules };
+  const combinedFiles = { ...projectFiles };
 
   const entry = Object.entries(combinedModules).find(
     ([path]) => path.includes(`${slug}.md`) || path.includes(`${slug}.mdx`)
@@ -219,21 +234,25 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
 
   if (!entry) return null;
 
-  const [, mdxModule] = entry;
+  const [pathRelative, mdxModule] = entry;
   const typedModule = mdxModule as MDXModule;
 
-  const period =
-    typedModule.frontmatter.period || typedModule.frontmatter.date;
+  const period = typedModule.frontmatter.period || typedModule.frontmatter.date;
 
   if (!period) {
     console.warn(`Project ${slug} has no period in the frontMatter`);
     return null;
   }
 
+  const rawContent = combinedFiles[pathRelative];
+  const readingTime =
+    typedModule.frontmatter.readingTime || calculateReadingTime(rawContent);
+
   return {
     title: typedModule.frontmatter.title,
     description: typedModule.frontmatter.description,
     period,
+    readingTime,
     tags: typedModule.frontmatter.tags || [],
     author: typedModule.frontmatter.author,
     draft: typedModule.frontmatter.draft || false,

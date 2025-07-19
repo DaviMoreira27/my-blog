@@ -16,7 +16,6 @@
     border-radius: 10px;
     gap: 0.5rem;
     transition: all 0.3s ease;
-    // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     cursor: pointer;
 
     &:hover {
@@ -43,7 +42,6 @@
 .post-description {
     color: $mocha-subtext1;
     font-size: 1rem;
-    word-break: break-all;
 }
 
 .post-meta {
