@@ -1,0 +1,216 @@
+@use '../variables' as *;
+
+.content-wrapper {
+    margin-left: 30rem;
+    padding: 2rem;
+    min-height: 100vh;
+    background-color: $mocha-base;
+}
+
+.main-content {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.article-header {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid $mocha-surface1;
+
+    .reading-time {
+        font-size: 0.875rem;
+        color: $mocha-subtext0;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 1rem;
+        font-weight: 500;
+    }
+
+    .article-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        line-height: 1.2;
+        color: $mocha-text;
+        margin: 0 0 1rem 0;
+        background: linear-gradient(135deg, $mocha-blue, $mocha-red);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-size: 200% 200%;
+        animation: gradient-shift 3s ease-in-out infinite;
+    }
+
+    .publish-date {
+        font-size: 1rem;
+        color: $mocha-subtext1;
+        font-style: italic;
+    }
+}
+
+.content-area {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 4rem;
+    align-items: start;
+
+    @media (max-width: 1200px) {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+.article-content {
+    max-width: none;
+    line-height: 1.7;
+    font-size: 1.125rem;
+    color: $mocha-text;
+
+    h2 {
+        font-size: 1.75rem;
+        font-weight: 600;
+        margin: 2.5rem 0 1rem 0;
+        color: $mocha-blue;
+        scroll-margin-top: 2rem;
+        position: relative;
+
+        &::before {
+            content: '';
+            position: absolute;
+            left: -1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 1.5rem;
+            background: linear-gradient(180deg, $mocha-blue, $mocha-sapphire);
+            border-radius: 2px;
+        }
+    }
+
+    h3 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 2rem 0 1rem 0;
+        color: $mocha-sapphire;
+        scroll-margin-top: 2rem;
+    }
+
+    h4 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin: 1.5rem 0 0.75rem 0;
+        color: $mocha-sky;
+        scroll-margin-top: 2rem;
+    }
+
+    p {
+        margin-bottom: 1.5rem;
+        color: $mocha-text;
+    }
+
+    ul,
+    ol {
+        margin-bottom: 1.5rem;
+        padding-left: 1.5rem;
+
+        li {
+            margin-bottom: 0.5rem;
+            color: $mocha-text;
+
+            &::marker {
+                color: $mocha-mauve;
+            }
+        }
+    }
+
+    blockquote {
+        border-left: 4px solid $mocha-blue;
+        background-color: $mocha-surface0;
+        padding: 1.5rem;
+        margin: 2rem 0;
+        border-radius: 0 8px 8px 0;
+        font-style: italic;
+        color: $mocha-subtext1;
+        position: relative;
+
+        &::before {
+            content: '"';
+            font-size: 4rem;
+            color: $mocha-blue;
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            opacity: 0.3;
+        }
+    }
+
+    code {
+        background-color: $mocha-surface1;
+        color: $mocha-peach;
+        padding: 0.2rem 0.4rem;
+        border-radius: 4px;
+        font-size: 0.9rem;
+    }
+
+    pre {
+        background-color: $mocha-mantle;
+        border: 1px solid $mocha-surface1;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin: 2rem 0;
+        overflow-x: auto;
+
+        code {
+            background: none;
+            padding: 0;
+            color: $mocha-text;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin: 2rem 0;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    a {
+        color: $mocha-blue;
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+        transition: all 0.2s ease;
+
+        // &:hover {
+        //     color: $mocha-sky;
+        //     border-bottom-color: $mocha-sky;
+        // }
+    }
+}
+
+.toc-sidebar {
+    position: sticky;
+    top: 2rem;
+    height: fit-content;
+    background-color: $mocha-surface0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid $mocha-surface1;
+
+    @media (max-width: 1200px) {
+        position: static;
+        margin-top: 2rem;
+    }
+}
+
+// Animação para o título
+@keyframes gradient-shift {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}

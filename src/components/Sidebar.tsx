@@ -14,7 +14,7 @@ export default function Sidebar() {
       <div className="sidebar-header">Rats Journey</div>
       
       <nav className="sidebar-links">
-        <a href="/about" data-initial="A">
+        <a href="/about-me" data-initial="A">
           <h3>About Me</h3>
         </a>
         <a href="/blog" data-initial="B">
@@ -37,7 +37,7 @@ export default function Sidebar() {
             title="Mastodon"
           >
             <span className="social-icon">🐘</span>
-            <span className="social-label">Mastodon</span>
+            <span className="social-label">Linkedin</span>
           </a>
           <a 
             href="https://twitter.com/astrodotbuild" 
@@ -45,8 +45,8 @@ export default function Sidebar() {
             className="social-link twitter"
             title="Twitter"
           >
-            <span className="social-icon">🐦</span>
-            <span className="social-label">Twitter</span>
+            <span className="social-icon">⚡</span>
+            <span className="social-label">Leetcode</span>
           </a>
           <a 
             href="https://github.com/withastro/astro" 

@@ -1,0 +1,72 @@
+---
+import "./PostList.scss";
+import "../global.scss";
+export interface Props {
+  items: {
+    title: string;
+    description: string;
+    tags: string[];
+    publishDate?: string;
+    readingTime?: string;
+    slug: string;
+    type: "post" | "project";
+    period?: string;
+  }[];
+}
+
+const { items } = Astro.props;
+
+const tagColors = [
+  "rosewater",
+  "flamingo",
+  "pink",
+  "mauve",
+  "red",
+  "maroon",
+  "peach",
+  "yellow",
+  "green",
+  "teal",
+  "sky",
+  "sapphire",
+  "blue",
+  "lavender",
+];
+---
+
+<ul class="post-list">
+  {
+    items.map((item, index) => (
+      <div class="post-card">
+        <li
+          class="post-list-item"
+          onclick={`window.location.href = '${
+            item.type === "post"
+              ? `/blog/${item.slug}`
+              : `/projects/${item.slug}`
+          }'`}
+        >
+          {item.title}
+        </li>
+        <p class="post-description">{item.description}</p>
+
+        <div class="post-meta">
+          {item.type === "post" && item.readingTime && (
+            <span class="post-reading-time">{item.readingTime}</span>
+          )}
+          {item.type === "project" && item.period && (
+            <span class="post-period">{item.period}</span>
+          )}
+        </div>
+
+        <div class="post-tags">
+          {item.tags.map((tag, i) => (
+            <span class={`tag tag-${tagColors[i % tagColors.length]}`}>
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+    ))
+  }
+</ul>

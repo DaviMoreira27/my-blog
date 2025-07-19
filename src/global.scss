@@ -104,7 +104,21 @@ body {
 
 .sidebar.collapsed .sidebar-links a {
     justify-content: center;
-    font-size: 0.9rem;
+    font-size: 1.2rem;
+    padding: 0.75rem 0.5rem;
+    margin-bottom: 0.5rem;
+
+    &[href="/about-me"] {
+        border: 2px solid $mocha-red;
+    }
+
+    &[href="/blog"] {
+        border: 2px solid $mocha-green;
+    }
+
+    &[href="/projects"] {
+        border: 2px solid $mocha-sapphire;
+    }
 
     &::after {
         content: attr(data-initial);
@@ -117,8 +131,21 @@ body {
 .sidebar-links a h3 {
     transition: opacity 0.3s;
     margin: 0;
-    font-size: 0.9rem;
     font-weight: 500;
+}
+
+.sidebar-links a {
+    &[href="/about-me"] {
+            color: $mocha-red;
+    }
+    
+    &[href="/blog"] {
+        color: $mocha-green;
+    }
+
+    &[href="/projects"] {
+        color: $mocha-sapphire;
+    }
 }
 
 .sidebar.collapsed .sidebar-links a h3 {
@@ -153,7 +180,7 @@ body {
     }
 }
 
-// Footer estilizado
+// Footer
 .sidebar-footer {
     margin-top: auto;
     padding: 1rem;
@@ -264,16 +291,12 @@ body {
     overflow: hidden;
 }
 
-// Cores específicas para cada rede social
 .social-link.mastodon {
     background: linear-gradient(135deg, $mocha-mauve, $mocha-pink);
     color: white;
 
     &:hover {
-        // Using color.adjust for absolute lightness increase
         background: linear-gradient(135deg, color.adjust($mocha-mauve, $lightness: 10%), color.adjust($mocha-pink, $lightness: 10%));
-        // Alternatively, using color.scale for relative lightness increase
-        // background: linear-gradient(135deg, color.scale($mocha-mauve, $lightness: 10%), color.scale($mocha-pink, $lightness: 10%));
     }
 }
 
@@ -295,7 +318,6 @@ body {
     }
 }
 
-// Animações adicionais
 @keyframes pulse {
 
     0%,
@@ -312,7 +334,6 @@ body {
     animation: pulse 1.5s infinite;
 }
 
-// Responsividade
 @media (max-height: 600px) {
     .sidebar-footer {
         padding: 0.5rem;

@@ -1,0 +1,142 @@
+@use '../variables' as *;
+
+.post-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.post-list-item {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    background-color: $mocha-surface0;
+    border-radius: 10px;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+
+    &:hover {
+        background-color: lighten($mocha-surface0, 5%);
+        transform: translateY(-5px) scale(1.01);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.post-card {
+    background-color: $mocha-surface1;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.post-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: $mocha-text;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.post-description {
+    color: $mocha-subtext1;
+    font-size: 1rem;
+    word-break: break-all;
+}
+
+.post-meta {
+    font-size: 0.9rem;
+    color: $mocha-overlay1;
+}
+
+.post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    color: #000;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.tag {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 0.3rem;
+    border: 1px solid;
+    transition: transform 0.2s ease;
+
+    &:hover {
+        transform: translateY(-2px);
+    }
+}
+
+.tag-rosewater {
+    background: $mocha-rosewater;
+    border-color: $mocha-rosewater;
+}
+
+.tag-flamingo {
+    background: $mocha-flamingo;
+    border-color: $mocha-flamingo;
+}
+
+.tag-pink {
+    background: $mocha-pink;
+    border-color: $mocha-pink;
+}
+
+.tag-mauve {
+    background: $mocha-mauve;
+    border-color: $mocha-mauve;
+}
+
+.tag-red {
+    background: $mocha-red;
+    border-color: $mocha-red;
+}
+
+.tag-maroon {
+    background: $mocha-maroon;
+    border-color: $mocha-maroon;
+}
+
+.tag-peach {
+    background: $mocha-peach;
+    border-color: $mocha-peach;
+}
+
+.tag-yellow {
+    background: $mocha-yellow;
+    border-color: $mocha-yellow;
+}
+
+.tag-green {
+    background: $mocha-green;
+    border-color: $mocha-green;
+}
+
+.tag-teal {
+    background: $mocha-teal;
+    border-color: $mocha-teal;
+}
+
+.tag-sky {
+    background: $mocha-sky;
+    border-color: $mocha-sky;
+}
+
+.tag-sapphire {
+    background: $mocha-sapphire;
+    border-color: $mocha-sapphire;
+}
+
+.tag-blue {
+    background: $mocha-blue;
+    border-color: $mocha-blue;
+}
+
+.tag-lavender {
+    background: $mocha-lavender;
+    border-color: $mocha-lavender;
+}

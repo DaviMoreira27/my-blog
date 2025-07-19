@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PostList from "../components/PostList.astro";
+import { getAllPosts } from "../BlogUtils";
+
+const posts = await getAllPosts();
+
+const items = posts.map((post) => ({
+  title: post.title,
+  description: post.description,
+  tags: post.tags ?? [],
+  publishDate: post.publishDate,
+  readingTime: post.readingTime,
+  slug: post.slug,
+  type: "post" as const,
+}));
+---
+
+<BaseLayout showToc={false} title="Blog Posts" description="Todos os artigos publicados.">
+  <PostList items={items} />
+</BaseLayout>

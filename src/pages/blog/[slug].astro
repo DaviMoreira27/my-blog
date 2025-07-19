@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getPostBySlug, getAllPosts, formatDate } from "../../BlogUtils";
+
+export async function getStaticPaths() {
+  const posts = await getAllPosts();
+
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+
+if (!post) {
+  return Astro.redirect("/404");
+}
+
+const { Content } = post.content;
+const formattedDate = formatDate(post.publishDate);
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.description}
+  readingTime={post.readingTime}
+  publishDate={formattedDate}
+  showToc={post.showToc}
+>
+  <Content />
+</BaseLayout>

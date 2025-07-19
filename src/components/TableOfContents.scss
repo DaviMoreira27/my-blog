@@ -1,0 +1,148 @@
+@use '../variables' as *;
+
+* {
+    font-family: 'ZedMono', monospace;
+}
+
+.table-of-contents {
+    .toc-title {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: $mocha-blue;
+        margin: 0 0 1rem 0;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid $mocha-surface1;
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 30%;
+            height: 2px;
+            background: linear-gradient(90deg, $mocha-blue, $mocha-sapphire);
+            border-radius: 1px;
+        }
+    }
+
+    .toc-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .toc-item {
+        margin-bottom: 0.25rem;
+        position: relative;
+
+        &.toc-level-2 {
+            margin-left: 0;
+        }
+
+        &.toc-level-3 {
+            margin-left: 1rem;
+        }
+
+        &.toc-level-4 {
+            margin-left: 2rem;
+        }
+
+        &.active {
+            .toc-link {
+                color: $mocha-blue;
+                background-color: rgba($mocha-blue, 0.1);
+                border-left: 3px solid $mocha-blue;
+            }
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            left: -12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 6px;
+            background-color: $mocha-overlay0;
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        &:hover::before {
+            opacity: 1;
+        }
+
+        &.active::before {
+            background-color: $mocha-blue;
+            opacity: 1;
+        }
+    }
+
+    .toc-link {
+        display: block;
+        width: 100%;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.875rem;
+        color: $mocha-subtext1;
+        text-decoration: none;
+        border: none;
+        background: none;
+        text-align: left;
+        cursor: pointer;
+        border-radius: 6px;
+        border-left: 3px solid transparent;
+        transition: all 0.2s ease;
+        line-height: 1.3;
+
+        &:hover {
+            color: $mocha-text;
+            background-color: rgba($mocha-surface1, 0.5);
+            transform: translateX(2px);
+        }
+
+        &:focus {
+            outline: 2px solid $mocha-blue;
+            outline-offset: 2px;
+        }
+    }
+
+    // Scrollbar personalizada para o TOC se necessário
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: $mocha-surface0;
+        border-radius: 2px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $mocha-overlay0;
+        border-radius: 2px;
+
+        &:hover {
+            background: $mocha-overlay1;
+        }
+    }
+}
+
+// Animação suave para mudanças de estado
+@keyframes toc-highlight {
+    0% {
+        background-color: transparent;
+    }
+
+    50% {
+        background-color: rgba($mocha-blue, 0.2);
+    }
+
+    100% {
+        background-color: rgba($mocha-blue, 0.1);
+    }
+}
+
+.toc-item.active .toc-link {
+    animation: toc-highlight 0.3s ease-out;
+}

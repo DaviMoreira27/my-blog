@@ -1,0 +1,87 @@
+---
+import "../global.scss";
+import "./BaseLayout.scss";
+import Sidebar from "../components/Sidebar";
+import BaseHead from "../components/BaseHead.astro";
+import TableOfContents from "../components/TableOfContents";
+
+export interface Props {
+  title: string;
+  description: string;
+  readingTime?: string;
+  publishDate?: string;
+  showToc?: boolean;
+  content?: any;
+  frontmatter?: any;
+}
+
+const {
+  title,
+  description,
+  readingTime,
+  publishDate,
+  showToc = true,
+  content,
+  frontmatter,
+} = Astro.props;
+
+const finalTitle = title || frontmatter?.title;
+const finalDescription = description || frontmatter?.description;
+const finalReadingTime = readingTime || frontmatter?.readingTime;
+const finalPublishDate =
+  publishDate || frontmatter?.publishDate || frontmatter?.date;
+const finalShowToc =
+  showToc !== undefined ? showToc : frontmatter?.showToc !== false;
+
+const hasSlotContent = Astro.slots.has("default");
+---
+
+<html lang="en">
+  <head>
+    <BaseHead title={finalTitle} description={finalDescription} />
+  </head>
+  <body>
+    <Sidebar client:load />
+    <div class="content-wrapper">
+      <main class="main-content">
+        <header class="article-header">
+          {
+            finalReadingTime && (
+              <div class="reading-time">{finalReadingTime}</div>
+            )
+          }
+          <h1 class="article-title">{finalTitle}</h1>
+          {
+            finalPublishDate && (
+              <time class="publish-date" datetime={finalPublishDate}>
+                {finalPublishDate}
+              </time>
+            )
+          }
+        </header>
+
+        <div class="content-area">
+          <article class="article-content">
+            {
+              hasSlotContent ? (
+                <slot />
+              ) : content ? (
+                <content.Content />
+              ) : (
+                <p>Nenhum conteúdo encontrado.</p>
+              )
+            }
+          </article>
+
+          {
+            finalShowToc && (
+              <aside class="toc-sidebar">
+                <TableOfContents client:load />
+              </aside>
+            )
+          }
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

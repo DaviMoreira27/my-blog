@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getAboutContent } from "../BlogUtils";
+
+const aboutContent = await getAboutContent();
+
+if (!aboutContent) {
+  return Astro.redirect("/404");
+}
+
+const { Content } = aboutContent;
+const { frontmatter } = aboutContent;
+---
+
+<BaseLayout
+  title={frontmatter.title}
+  description={frontmatter.description}
+  showToc={frontmatter.showToc}
+>
+  <Content />
+</BaseLayout>
