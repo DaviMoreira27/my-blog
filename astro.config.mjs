@@ -1,5 +1,15 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 
+import mdx from '@astrojs/mdx';
+
+import sitemap from '@astrojs/sitemap';
+
+import react from '@astrojs/react';
+
 // https://astro.build/config
-export default defineConfig({});
+export default defineConfig({
+    site: 'https://ratsjourney.dev',
+    output: 'static',
+    integrations: [mdx(), sitemap(), react()]
+});
