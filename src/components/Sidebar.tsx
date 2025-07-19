@@ -1,4 +1,3 @@
-// src/components/Sidebar.tsx
 import { useState, useEffect } from "react";
 import "../global.scss";
 import { isSidebarCollapsed } from "../SidebarState";
@@ -17,14 +16,13 @@ export default function Sidebar() {
     checkIsMobile();
     window.addEventListener("resize", checkIsMobile);
 
-    // Subscrever a mudanças no store e atualizar o estado local
     const unsubscribe = isSidebarCollapsed.listen((value) => {
       setCollapsed(value);
     });
 
     return () => {
       window.removeEventListener("resize", checkIsMobile);
-      unsubscribe(); // Limpar a subscrição
+      unsubscribe();
     };
   }, []);
 
@@ -38,11 +36,17 @@ export default function Sidebar() {
     let newCollapsedState;
     if (isMobile) {
       setMobileOpen(!mobileOpen);
-      newCollapsedState = collapsed; // O estado de colapso da sidebar não muda com o mobileOpen
+      newCollapsedState = collapsed;
     } else {
       newCollapsedState = !collapsed;
-      setCollapsed(newCollapsedState); // Atualiza o estado local
-      isSidebarCollapsed.set(newCollapsedState); // Atualiza o store global
+      setCollapsed(newCollapsedState);
+      isSidebarCollapsed.set(newCollapsedState);
+    }
+  };
+
+  const handleMobileClose = () => {
+    if (isMobile) {
+      setMobileOpen(false);
     }
   };
 
@@ -58,10 +62,6 @@ export default function Sidebar() {
     } else {
       document.body.style.overflow = "unset";
     }
-
-    // Se a sidebar estiver aberta no mobile, ela "aparece" sobre o conteúdo, não o empurra.
-    // Assim, no mobile, o estado 'collapsed' do store pode permanecer inalterado pela UI da sidebar.
-    // No desktop, ele precisa ser atualizado.
   }, [isMobile, mobileOpen]);
 
   useEffect(() => {
@@ -97,29 +97,31 @@ export default function Sidebar() {
 
       <aside
         className={`sidebar ${collapsed && !isMobile ? "collapsed" : ""} ${
-          // Adicione !isMobile aqui para evitar conflito com 'open'
           isMobile && mobileOpen ? "open" : ""
         }`}
         aria-label="Menu de navegação"
       >
-        <button
-          className="toggle-button"
-          onClick={handleToggle}
-          aria-label={
-            isMobile
-              ? mobileOpen
-                ? "Fechar menu"
-                : "Abrir menu"
-              : collapsed
-              ? "Expandir sidebar"
-              : "Recolher sidebar"
-          }
-        >
-          {isMobile ? (mobileOpen ? "×" : "☰") : collapsed ? "»" : "«"}
-        </button>
+        {!isMobile && (
+          <button
+            className="toggle-button desktop-toggle"
+            onClick={handleToggle}
+            aria-label={collapsed ? "Expandir sidebar" : "Recolher sidebar"}
+          >
+            {collapsed ? "»" : "«"}
+          </button>
+        )}
 
         <div className="sidebar-header">
           <p>Rats Journey</p>
+          {isMobile && mobileOpen && (
+            <button
+              className="mobile-close-button"
+              onClick={handleMobileClose}
+              aria-label="Fechar menu"
+            >
+              ×
+            </button>
+          )}
         </div>
 
         <nav
@@ -127,13 +129,28 @@ export default function Sidebar() {
           role="navigation"
           aria-label="Menu principal"
         >
-          <a href="/about-me" data-initial="A" onClick={handleLinkClick}>
+          <a
+            href="/about-me"
+            className="link"
+            data-initial="A"
+            onClick={handleLinkClick}
+          >
             <h3>About Me</h3>
           </a>
-          <a href="/blog" data-initial="B" onClick={handleLinkClick}>
+          <a
+            href="/blog"
+            className="link"
+            data-initial="B"
+            onClick={handleLinkClick}
+          >
             <h3>Blog</h3>
           </a>
-          <a href="/projects" data-initial="P" onClick={handleLinkClick}>
+          <a
+            href="/projects"
+            className="link"
+            data-initial="P"
+            onClick={handleLinkClick}
+          >
             <h3>Projects</h3>
           </a>
         </nav>
