@@ -86,8 +86,46 @@ body {
     @media (max-width: 1300px) {
         grid-template-columns: 1fr;
         gap: 2rem;
+        display: flex;
+        flex-direction: column;
     }
 }
+
+.toc-sidebar {
+    position: sticky;
+    top: 2rem;
+    height: fit-content;
+    background-color: $mocha-surface0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid $mocha-surface1;
+    box-sizing: border-box;
+
+    @media (max-width: 1300px) {
+        order: -1;
+        position: static;
+        margin-top: 0;
+        margin-bottom: 2rem;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    @media (max-width: 768px) {
+        padding: 1rem;
+    }
+}
+
+.article-content {
+    max-width: none;
+    line-height: 1.7;
+    font-size: 1.125rem;
+    color: $mocha-text;
+
+    @media (max-width: 1300px) {
+        order: 0;
+    }
+}
+
 
 .article-content {
     max-width: none;
