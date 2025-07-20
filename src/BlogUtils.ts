@@ -262,14 +262,21 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
   };
 }
 
+
 export async function getAboutContent(): Promise<MDXModule | null> {
-  try {
-    const aboutModule = (await import(
-      "../src/contents/about-me/about-me.mdx"
-    )) as unknown as MDXModule;
-    return aboutModule;
-  } catch (error) {
-    console.error("Error loading the about me content:", error);
+  const aboutEntries = Object.entries(aboutModules);
+  if (aboutEntries.length === 0) {
+    console.error("No content found");
     return null;
   }
+
+  const [_, mdxModule] = aboutEntries[0];
+  const typedModule = mdxModule as MDXModule;
+
+  if (!typedModule.frontmatter) {
+    console.error("Frontmatter not found for the about-me page");
+    return null;
+  }
+
+  return typedModule;
 }
