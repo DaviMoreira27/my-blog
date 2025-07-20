@@ -26,6 +26,23 @@ export default function Sidebar() {
     };
   }, []);
 
+  // Efeito para controlar a classe do body
+  useEffect(() => {
+    if (!isMobile) {
+      if (collapsed) {
+        document.body.classList.add("sidebar-collapsed");
+      } else {
+        document.body.classList.remove("sidebar-collapsed");
+      }
+    } else {
+      document.body.classList.remove("sidebar-collapsed");
+    }
+
+    return () => {
+      document.body.classList.remove("sidebar-collapsed");
+    };
+  }, [collapsed, isMobile]);
+
   const handleLinkClick = () => {
     if (isMobile) {
       setMobileOpen(false);
@@ -76,7 +93,7 @@ export default function Sidebar() {
   }, [isMobile, mobileOpen]);
 
   function redirectUser() {
-    window.location.href = '/';
+    window.location.href = "/";
     return;
   }
 
@@ -117,9 +134,7 @@ export default function Sidebar() {
         )}
 
         <div className="sidebar-header">
-          <p className="sidebar-title"
-            onClick={redirectUser}
-          >
+          <p className="sidebar-title" onClick={redirectUser}>
             Rats Journey
           </p>
           {isMobile && mobileOpen && (

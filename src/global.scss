@@ -36,30 +36,23 @@
   font-style: normal;
 }
 
-body {
-  margin: 0;
-  font-family: "ZedMono", monospace;
-  background-color: $mocha-base;
-  color: $mocha-text;
-}
-
 .sidebar {
   position: fixed;
   top: 0;
   left: 0;
   height: 100vh;
   background: linear-gradient(180deg, $mocha-surface0 0%, $mocha-mantle 100%);
-  width: 220px;
+  width: $sidebar-width-expanded;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
   border-right: 1px solid $mocha-surface1;
-  z-index: 1000;
+  z-index: 100;
 
   &.collapsed {
-    width: 80px;
+    width: $sidebar-width-collapsed;
 
     .sidebar-title{
       display: none;
@@ -317,7 +310,7 @@ body {
 
 .mobile-menu-button {
   display: none;
-  position: absolute;
+  position: fixed;
   top: 1rem;
   left: 1rem;
   background: linear-gradient(135deg, $mocha-blue, $mocha-sapphire);
