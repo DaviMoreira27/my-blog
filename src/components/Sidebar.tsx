@@ -75,6 +75,11 @@ export default function Sidebar() {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [isMobile, mobileOpen]);
 
+  function redirectUser() {
+    window.location.href = '/';
+    return;
+  }
+
   return (
     <>
       {isMobile && (
@@ -112,7 +117,11 @@ export default function Sidebar() {
         )}
 
         <div className="sidebar-header">
-          <p>Rats Journey</p>
+          <p className="sidebar-title"
+            onClick={redirectUser}
+          >
+            Rats Journey
+          </p>
           {isMobile && mobileOpen && (
             <button
               className="mobile-close-button"
@@ -161,35 +170,35 @@ export default function Sidebar() {
           </div>
           <div className="social-links" role="list" aria-label="Redes sociais">
             <a
-              href="https://m.webtoo.ls/@astro"
+              href="https://www.linkedin.com/in/davimoreiraprogrammer/"
               target="_blank"
               rel="noopener noreferrer"
-              className="social-link mastodon"
+              className="social-link linkedin"
               title="LinkedIn"
               role="listitem"
               onClick={handleLinkClick}
             >
               <span className="social-icon" aria-hidden="true">
-                🐘
+                <i className="fa-brands fa-linkedin-in"></i>
               </span>
-              <span className="social-label">LinkedIn</span>
+              <span className="social-label">Linkedin</span>
             </a>
             <a
-              href="https://twitter.com/astrodotbuild"
+              href="https://leetcode.com/u/DaviMoreira27/"
               target="_blank"
               rel="noopener noreferrer"
-              className="social-link twitter"
+              className="social-link leetcode"
               title="LeetCode"
               role="listitem"
               onClick={handleLinkClick}
             >
               <span className="social-icon" aria-hidden="true">
-                ⚡
+                <i className="fa-solid fa-code"></i>
               </span>
               <span className="social-label">LeetCode</span>
             </a>
             <a
-              href="https://github.com/withastro/astro"
+              href="https://github.com/DaviMoreira27"
               target="_blank"
               rel="noopener noreferrer"
               className="social-link github"
@@ -198,7 +207,7 @@ export default function Sidebar() {
               onClick={handleLinkClick}
             >
               <span className="social-icon" aria-hidden="true">
-                ⚡
+                <i className="fa-brands fa-github"></i>
               </span>
               <span className="social-label">GitHub</span>
             </a>

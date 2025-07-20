@@ -60,6 +60,14 @@ body {
 
   &.collapsed {
     width: 80px;
+
+    .sidebar-title{
+      display: none;
+    }
+  }
+
+  .sidebar-title {
+    cursor: pointer;
   }
 }
 
@@ -428,8 +436,9 @@ body {
   }
 
   .social-icon {
-    font-size: 1.2rem;
+    font-size: 1.0rem;
     transition: transform 0.3s ease;
+    color: $mocha-surface0;
   }
 
   .social-label {
@@ -437,6 +446,7 @@ body {
     font-weight: 500;
     white-space: nowrap;
     transition: opacity 0.3s ease;
+    color: $mocha-surface0;
   }
 
   &:hover .social-icon {
@@ -518,7 +528,7 @@ body {
   }
 }
 
-.social-link.mastodon {
+.social-link.linkedin {
   background: linear-gradient(135deg, $mocha-mauve, $mocha-pink);
   color: white;
 
@@ -531,7 +541,7 @@ body {
   }
 }
 
-.social-link.twitter {
+.social-link.leetcode {
   background: linear-gradient(135deg, $mocha-sky, $mocha-sapphire);
   color: white;
 

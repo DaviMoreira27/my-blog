@@ -1,24 +1,14 @@
 ---
 import "../global.scss";
-import Sidebar from "../components/Sidebar";
-import BaseHead from "../components/BaseHead.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<html lang="en">
-  <head>
-    <BaseHead title="Rats Journey" description="Main page" />
-  </head>
-  <body>
-    <Sidebar client:load />
-    <main>
-      <BaseLayout
-        title="Welcome to Rats Journey"
-        description="This is your starting page."
-        showToc={false}
-      >
-        <p>This is your starting page.</p>
-      </BaseLayout>
-    </main>
-  </body>
-</html>
+
+<BaseLayout
+  title="Welcome to Rats Journey"
+  description="This is your starting page."
+  showToc={false}
+>
+  <p>This is your starting page.</p>
+</BaseLayout>
+  
