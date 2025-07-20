@@ -134,9 +134,9 @@ export default function Sidebar() {
         )}
 
         <div className="sidebar-header">
-          <p className="sidebar-title" onClick={redirectUser}>
-            Rats Journey
-          </p>
+          <h2 className="sidebar-title" onClick={redirectUser}>
+            Dogatsu
+          </h2>
           {isMobile && mobileOpen && (
             <button
               className="mobile-close-button"
@@ -181,7 +181,7 @@ export default function Sidebar() {
 
         <div className="sidebar-footer">
           <div className="copyright">
-            <small>&copy; {year} Rats Journey</small>
+            <small>&copy; {year} Dogatsu</small>
           </div>
           <div className="social-links" role="list" aria-label="Redes sociais">
             <a

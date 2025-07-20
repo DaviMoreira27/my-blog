@@ -61,6 +61,7 @@
 
   .sidebar-title {
     cursor: pointer;
+    letter-spacing: 5px;
   }
 }
 
@@ -178,31 +179,30 @@
 .sidebar-links a {
   color: $mocha-text;
   text-decoration: none;
-  padding: 0.5rem;
+  padding: 0.8rem;
   border-radius: 6px;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
   white-space: nowrap;
   overflow: hidden;
-  margin-bottom: 0.25rem;
+  margin-bottom: 1rem;
 
   &:hover {
     background-color: $mocha-surface1;
-    transform: translateX(4px);
+    transform: translateX(5px);
   }
-  @media (max-width: 768px) {
-    &[href="/about-me"] {
-      border: 2px solid $mocha-red;
-    }
 
-    &[href="/blog"] {
-      border: 2px solid $mocha-green;
-    }
+  &[href="/about-me"] {
+    border: 2px solid $mocha-red;
+  }
 
-    &[href="/projects"] {
-      border: 2px solid $mocha-sapphire;
-    }
+  &[href="/blog"] {
+    border: 2px solid $mocha-green;
+  }
+
+  &[href="/projects"] {
+    border: 2px solid $mocha-sapphire;
   }
 }
 
