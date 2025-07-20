@@ -3,12 +3,57 @@ import "../global.scss";
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-
 <BaseLayout
   title="Welcome to Dogatsu"
   description="This is your starting page."
   showToc={false}
 >
-  <p>This is my starting page.</p>
+  <p>
+    One week, I really wanted to eat Tonkatsu, a Japanese dish that consists of
+    breaded and fried pork ribs. One day that week, I was walking down the
+    street while trying to think of words in my mind that included the word
+    katsu, just for fun. While I was walking, I saw a dog. The first thing that
+    came to my mind was <b>cakatsu</b> (from cachorro + katsu). Then, I decided to
+    translate it into English, and it became <b>dogkatsu</b>, which eventually
+    turned into <b>Dogatsu</b> =).
+  </p>
+
+  <p>
+    This is not just my portfolio, but a piece of my personality, Here, I plan
+    to share photos I've taken, projects, programming or not, posts about
+    various topics such as movies, books, articles, and more.
+  </p>
+
+  <p>
+    All the content on this site will be in English because I need to practice
+    my writing skills. Maybe one day I'll also write in German or Japanese here.
+  </p>
+
+  <script>
+    const colors = [
+      "#f5e0dc",
+      "#f2cdcd",
+      "#f5c2e7",
+      "#cba6f7",
+      "#f38ba8",
+      "#eba0ac",
+      "#fab387",
+      "#f9e2af",
+      "#a6e3a1",
+      "#94e2d5",
+      "#89dceb",
+      "#74c7ec",
+      "#89b4fa",
+      "#b4befe",
+    ];
+
+    // GPT generated, it was the quickest way
+    document.addEventListener("DOMContentLoaded", () => {
+      const paragraphs = document.querySelectorAll("p");
+      paragraphs.forEach((p) => {
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        p.style.color = color;
+      });
+    });
+  </script>
 </BaseLayout>
-  
