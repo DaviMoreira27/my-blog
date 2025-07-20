@@ -1,6 +1,6 @@
 ---
 import "../global.scss";
-import FallbackImage from "../assets/imgs/catppuccin-logo.png";
+import FallbackImage from "../../public/my-icon.png";
 import type { ImageMetadata } from "astro";
 
 interface Props {
@@ -17,7 +17,7 @@ const { title, description, image = FallbackImage } = Astro.props;
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="icon" type="image/svg+xml" href="/catppuccin-logo.png" />
+<link rel="icon" type="image/svg+xml" href="/my-icon.png" />
 <link rel="sitemap" href="/sitemap-index.xml" />
 <script src="https://kit.fontawesome.com/334e2650ec.js" crossorigin="anonymous"
 ></script>
