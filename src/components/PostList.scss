@@ -1,4 +1,5 @@
 @use '../variables' as *;
+@use "sass:color";
 
 .post-list {
     list-style: none;
@@ -17,10 +18,9 @@
     gap: 0.5rem;
     transition: all 0.3s ease;
     cursor: pointer;
-    /* Remover height: 100% daqui, pois o post-card já vai gerenciar isso */
 
     &:hover {
-        background-color: lighten($mocha-surface0, 5%);
+        background-color:  color.adjust($mocha-surface0, $lightness: 5%);
         transform: translateY(-5px) scale(1.01);
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
     }
@@ -33,7 +33,6 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    /* Mantém a altura igual para todos os cards no grid */
 }
 
 .post-title {
@@ -55,18 +54,12 @@
     flex-grow: 1;
     margin-bottom: 1rem;
 
-    /* --- Adicionado para limitar o texto --- */
     overflow: hidden;
-    /* Esconde o texto que transborda */
     display: -webkit-box;
-    /* Necessário para -webkit-line-clamp */
     -webkit-box-orient: vertical;
-    /* Define a orientação da caixa */
-    -webkit-line-clamp: 3;
-    /* Limita o texto a 3 linhas (ajuste este valor) */
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
     text-overflow: ellipsis;
-    /* Adiciona a elipse se o texto for cortado */
-    /* --- Fim da adição --- */
 
     @media (max-width: 768px) {
         font-size: 0.95rem;

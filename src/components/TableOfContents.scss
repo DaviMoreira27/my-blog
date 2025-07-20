@@ -108,7 +108,6 @@
         }
     }
 
-    // Scrollbar personalizada para o TOC se necessário
     &::-webkit-scrollbar {
         width: 4px;
     }
@@ -128,7 +127,6 @@
     }
 }
 
-// Animação suave para mudanças de estado
 @keyframes toc-highlight {
     0% {
         background-color: transparent;
