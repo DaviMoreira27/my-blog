@@ -1,0 +1,30 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getProjectBySlug, getAllProjects } from "../../BlogUtils";
+
+export async function getStaticPaths() {
+  const projects = await getAllProjects();
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const project = await getProjectBySlug(slug as string);
+
+if (!project) {
+  return Astro.redirect("/404");
+}
+
+const { Content } = project.content;
+---
+
+<BaseLayout
+  title={project.title}
+  description={project.description}
+  showToc={project.showToc}
+  period={project.period}
+  githubUrl={project.content.frontmatter.githubUrl}
+>
+    <Content />
+</BaseLayout>

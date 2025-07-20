@@ -13,6 +13,9 @@ export interface Props {
   showToc?: boolean;
   content?: any;
   frontmatter?: any;
+  // Add new props for project specific data
+  period?: string;
+  githubUrl?: string;
 }
 
 const {
@@ -23,6 +26,9 @@ const {
   showToc = true,
   content,
   frontmatter,
+  // Destructure new props
+  period,
+  githubUrl,
 } = Astro.props;
 
 const finalTitle = title || frontmatter?.title;
@@ -32,6 +38,11 @@ const finalPublishDate =
   publishDate || frontmatter?.publishDate || frontmatter?.date;
 const finalShowToc =
   showToc !== undefined ? showToc : frontmatter?.showToc !== false;
+
+// Determine if it's a project and get its specific data
+const isProject = !!period || !!githubUrl; // A simple check if project-specific data is present
+const finalPeriod = period || frontmatter?.period;
+const finalGithubUrl = githubUrl || frontmatter?.githubUrl;
 
 const hasSlotContent = Astro.slots.has("default");
 ---
@@ -52,11 +63,33 @@ const hasSlotContent = Astro.slots.has("default");
           }
           <h1 class="article-title">{finalTitle}</h1>
           {
-            finalPublishDate && (
-              <time class="publish-date" datetime={finalPublishDate}>
-                {finalPublishDate}
-              </time>
-            )
+            finalPublishDate &&
+              !isProject && (
+                <time class="publish-date" datetime={finalPublishDate}>
+                  {finalPublishDate}
+                </time>
+              )
+          }
+          {
+            finalPeriod &&
+              isProject && (
+                <p class="project-period">Period: {finalPeriod}</p>
+              )
+          }
+          {
+            finalGithubUrl &&
+              isProject && (
+                <p class="project-github-link">
+                  GitHub:{" "}
+                  <a
+                    href={finalGithubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {finalGithubUrl}
+                  </a>
+                </p>
+              )
           }
         </header>
 
