@@ -182,7 +182,21 @@ export async function getAllProjects(): Promise<Project[]> {
     });
   }
 
-  return projects;
+  const orderedProjects = orderProjectsByDate(projects);
+  return orderedProjects;
+}
+
+function orderProjectsByDate(projects: Project[]) {
+  return projects.sort((a, b) => {
+    const startDateA = getStartDate(a.period);
+    const startDateB = getStartDate(b.period);
+    return startDateB.getTime() - startDateA.getTime();
+  });
+}
+
+function getStartDate(period: string): Date {
+  const [start] = period.split(" - ");
+  return new Date(start + " 1");
 }
 
 export async function getPostBySlug(slug: string): Promise<BlogPost | null> {

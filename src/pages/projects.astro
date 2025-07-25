@@ -16,5 +16,21 @@ const items = projects.map((project) => ({
 ---
 
 <BaseLayout showToc={false} title="Projects" description="My main projects.">
-  <PostList items={items} />
+  {
+    items.length > 0 ? (
+      <PostList items={items} />
+    ) : (
+      <p>
+        No projects posted yet, in the meantime check my{" "}
+        <a
+          href="https://github.com/DaviMoreira27"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Github repo.
+        </a>
+        =)
+      </p>
+    )
+  }
 </BaseLayout>
