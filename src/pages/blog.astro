@@ -16,6 +16,19 @@ const items = posts.map((post) => ({
 }));
 ---
 
-<BaseLayout showToc={false} title="Blog Posts" description="Todos os artigos publicados.">
-  <PostList items={items} />
+<BaseLayout
+  showToc={false}
+  title="Blog Posts"
+  description="Todos os artigos publicados."
+>
+  {
+    items.length > 0 ? (
+      <PostList items={items} />
+    ) : (
+      <img id="nyan-cat-image" src="../../public/nyan-cat.gif" alt="Nyan Cat">
+      <p>
+          No blog posts available for now =(
+      </p>
+    )
+  }
 </BaseLayout>
