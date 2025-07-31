@@ -6,7 +6,7 @@ import react from '@astrojs/react';
 
 // https://astro.build/config
 export default defineConfig({
-    site: 'https://dogatsu.dev',
+    site: 'https://dogatsu.pages.dev',
     output: 'static',
     integrations: [mdx(), sitemap(), react()]
 });

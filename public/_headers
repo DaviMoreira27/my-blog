@@ -1,0 +1,8 @@
+https://dogatsu.pages.dev/*
+  X-Robots-Tag: noindex
+  Access-Control-Allow-Origin: *
+  X-Robots-Tag: nosnippet
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: no-referrer
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
