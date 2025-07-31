@@ -1,10 +1,8 @@
 https://dogatsu.pages.dev/*
-  X-Robots-Tag: noindex
   Access-Control-Allow-Origin: *
-  X-Robots-Tag: nosnippet
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: no-referrer
   Strict-Transport-Security: max-age=31536000; includeSubDomains
-  Content-Security-Policy: default-src 'self'; img-src 'self' data:; script-src 'self' 'unsafe-inline' https://kit.fontawesome.com; connect-src 'self' https://ka-f.fontawesome.com; style-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'self'; frame-ancestors 'none';
+  Content-Security-Policy: default-src 'self'; img-src 'self' data:; script-src 'self' 'unsafe-inline' https://kit.fontawesome.com; connect-src 'self' https://ka-f.fontawesome.com; style-src 'self' 'unsafe-inline'; font-src 'self' https://ka-f.fontawesome.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none';
   Permissions-Policy: geolocation=(), microphone=(), camera=(), fullscreen=(self), interest-cohort=()
