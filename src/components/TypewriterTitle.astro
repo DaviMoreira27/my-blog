@@ -1,0 +1,39 @@
+---
+export interface Props {
+  phrases: string[];
+  enable: boolean;
+}
+
+const { phrases, enable } = Astro.props;
+---
+
+{
+  enable ? (
+    <h1 class="article-title">
+      <span id="typewriter" />
+    </h1>
+  ) : (
+    <h1 class="article-title">{phrases[0]}</h1>
+  )
+}
+
+<script>
+  if (Astro.props.enableTypewriter) {
+    const phrases = Astro.props.phrases;
+    const el = document.getElementById("typewriter");
+
+    let phraseIndex = 0;
+    let charIndex = 0;
+
+    function type() {
+      const current = phrases[phraseIndex];
+      if (el) {
+        el.textContent = current.slice(0, charIndex++);
+        if (charIndex <= current.length) {
+          requestAnimationFrame(type);
+        }
+      }
+    }
+    type();
+  }
+</script>

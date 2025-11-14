@@ -12,31 +12,37 @@ showToc: true
   <p className="intro-text">
     Hello! Welcome to my digital space. Here, I share my journey, lessons learned, and experiences in the world of technology.
   </p>
+  <p>
+    <strong>
+      You can download a professional and summarized version of this section
+      <a href="/resume.pdf" download><strong>here</strong></a>.
+    </strong>
+  </p>
 </section>
 
 ## Who I Am
 
-Hi, my name is Davi Santana, i am a software developer living in São Carlos, Brazil. My dream is basically to create big things, that run in even bigger servers and reach an enormous number of people. My study and work focus is at the architecturing, development, maintenance and monitoring of distributed system. In addition I aim to study more about parallel computing (CUDA, OpenCL) and MLOps in the future.
+Hi, my name is Davi Santana, I am a software developer living in São Carlos, Brazil. My dream is to create big things, that run in even bigger servers and reach an enormous number of people. My study and work focus is at the architecturing, development, maintenance and monitoring of distributed system. In addition I aim to study more about parallel computing (CUDA, OpenCL) and HPC (High Performance Computing).
 
-I started in the area by curiosity of how the finance market, mainly the banks, handled a lot of payments in the same time. That drove me to start a technical degree in web development in 2021. In 2024, I began my studies in Information Systems with coursework specialization (minor) in Distributed Systems and High-Performance Computing at the University of São Paulo, in São Carlos, the largest university in Latin America. In the moment I work at Tekna.Rocks, a software consultancy based both in Brazil and the United States where I mainly work with distributed systems with high workloads, developing and monitoring 15+ services.
+I started in the area by curiosity of how the finance market, mainly the banks, handled a lot of payments in the same time. That drove me to start a technical degree in web development in 2021. 
 
-My objective is to finish my current degree and gain more work experience, after some time, concomitantly with my work I wish to pursue a master's degree. Someday I want to have a PhD in Distributed Systems, inovating in the public and/or private sector.
+In 2024, I began my studies in Information Systems with coursework specialization (minor) in Distributed Systems and High-Performance Computing at the University of São Paulo, in São Carlos, the largest university in Latin America. In the moment I work at Tekna.Rocks, a software consultancy based both in Brazil and the United States where I mainly work with distributed systems with high workloads, developing and monitoring 20+ services.
 
 Beyond the IT area, I have history and economy as fields of big interest (I considered studying economy for a long time).
 
-As my hobbies I have programming, mostly utilizing languages that I don't work with on my day to day basis, anime, manga and music.
+As my hobbies I have programming, mostly utilizing languages that I don't work with on my day to day basis, gaming and music (I am trying to learn Strudel).
 
 ## Experiences
 
 ### Software Developer · Tekna.Rocks  
 **Mill Valley, California, United States — April 2024 - Present**
 
-- Architected and am implemented an integration with Amazon SP-API, incorporating it into the content processing workflow and restructuring part of the infrastructure to meet Amazon's requirements.
+- Architected and implemented integrations with Amazon SP-API and Google Drive, incorporating it into the content processing workflow and restructuring part of the infrastructure to meet both vendors requirements.
 - Developed image and document recognition workflows using Google Cloud Vision API, enhancing automation and data extraction capabilities for large-scale processing tasks.
+- Led the integration and refactoring of the two most critical services in the platform, redesigning their serverless multi-cloud distributed architecture and optimizing the processing pipeline for audio, image, and document scanning.
 - Worked extensively with microservices architecture, implementing workers for computationally intensive processing of audio, video, and text data.
-- Automated various Google Cloud Platform operations using Golang, improving efficiency and reducing manual intervention across infrastructure tasks.
-- Implemented Cloudflare Auto RAG in the workflow to provide customized insights to clients.
-- Developed and integrated a system using Python and ElectronJs to process and organize ophthalmologic exam data, improving clinical workflows and data accessibility.
+- Coordinated and delegated backend and infrastructure tasks, establishing engineering best practices and mentoring junior developers and peers on core concepts such as advanced Node.js streams and database performance optimization.
+- Identified key performance bottlenecks across the platform and defined a resolution plan covering more than 7 services and an Angular frontend. The optimization work required extensive profiling and deep expertise in JavaScript, Node.js internals, and database tuning, reducing the load time of report-heavy pages from 8 seconds to 1 second **(≈85% reduction)**. 
 
 ### Volunteer Researcher · Monipaep (USP)  
 **São Carlos, Brazil — March 2024 - February 2025**
@@ -46,64 +52,47 @@ As my hobbies I have programming, mostly utilizing languages that I don't work w
 - Constructed a deployment pipeline on AWS EC2, streamlining the deployment process and reducing downtime.
 - Mentored other team members on the nuances of the project, fostering a collaborative learning environment and improving overall project quality.
 
-### Infrastructure Volunteer · SEMCOMP (USP)  
-**São Carlos, Brazil**
-
-- Supported the technical infrastructure of one of the largest student-led computing events in Brazil.
-- Contributed to the setup, maintenance, and troubleshooting of event systems, ensuring reliability and smooth execution across all activities.
-
-### Salesman
-**São Paulo, Brazil** — January 2019 - January 2023 
-
-- Familly business. In the reality my work tasks would vary from cleaning to define purchases with our suppliers and make sure that we paid all our taxes.
-
 ## My Tech Stack
 
-My focus is on infraestructure and backend, however I currently act as a full-stack developer
+My focus is on infrastructure and backend, however I currently act as a full-stack developer
 
 ### Backend
 
-- **Node.js**, very cool
-- **Cloudflare Workers**, it's not my favorite engine, but it does the job.
-- **Go**, what I would like to use 80% of my time
-- **Java**, what I would like to use 20% of my time
-  - **Spring**, cool
+- **Node.js**, the one that I know the most
+- **Cloudflare Workers**, it's not my favorite runtime, but it does the job.
+- **Go**, love to build new things with it
+- **Python**, the syntax is kinda meh, but the versatility is awesome
 - **Typescript**, what I use 90% of my time
-  - **Hono**, cool for some time, but after a while it starts to get in my nerves
-  - **Express**, fast and fun, but kinda limited =(
-  - **Nest**, very cool, I would like to use more
+  - **Hono**, the current status quo for all my professional projects
+  - **Express**, fast and fun
+  - **Nest**, very cool, my go to for fast projects
+  - **And a lot more**, i'm not a Nest or express developer, I am a Back-end engineer with deep knowledge on NodeJs and Javascript
 - **PHP**, miss you, very fun
 
-### SQL and Non SQL Databases
+### SQL and NoSQL Databases
 
 - **PostgreSQL**, what I use the most
 - **MySQL**, PHP times
-- **Redis**, i don't use much often
-- **KV and D1 Cloudflare**, yeah, I use a lot, bu I don't have much opinion about it
-- **SQLite**, very cool
+- **Redis**, the most used NoSQL
+- **KV and D1 Cloudflare**, very efficient,
 
-### Infraestructure and Containerization
+### Infrastructure and Containerization
 
-- **Docker**, cool
-- **Podman**, very cool
+- **Docker**, using everywhere
+- **Podman**, my go to when I need to build a quick environment
 - **Terraform**, makes my life a lot easier
-- **Kubernetes**, still learning, but the concept is neat
+- **Kubernetes**, still learning, spoiler: it's being awesome
 
 ### Clouds
 
-- **AWS**, my favorite, but I don't use much often
+- **AWS**, my favorite
 - **GCP**, the one that I use the most
-- **Cloudlare**, I use more than I want it
+- **Cloudflare**, provides an awesome serverless edge-computing platform, however, it needs better support.
 
 ### Frontend
 
-- **ReactJs**, I kind hate it, but I still use
-- **Angular**, the goat, but it's still frontend
+- **Angular**, my preferred frontend framework 
 - **Astro**, used only for this site, but I liked it
-
-### Mobile
-
-- **React Native**, definitely the one that I hate the most
 
 ## Contact
 
